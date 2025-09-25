@@ -39,7 +39,7 @@ curl --location 'https://api.letsdeel.com/rest/v2/eor/employment_cost' \
 }'
 ```
 
-Remember to replace {token} in the example below with your actual API token.
+Remember to replace token in the example below with your actual API token.
 
 ## Step 3: Analyze the API Response
 
