@@ -20,14 +20,14 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://github.com',
+  url: 'https://stefano-romanelli-deel.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/dev-docs-as-code/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'stefano-romanelli-Deel', // Usually your GitHub org/user name.
+  organizationName: 'stefano-romanelli-deel', // Usually your GitHub org/user name.
   projectName: 'dev-docs-as-code', // Usually your repo name.
   deploymentBranch: 'main',
   trailingSlash: false,
