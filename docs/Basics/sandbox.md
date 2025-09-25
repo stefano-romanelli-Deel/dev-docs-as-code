@@ -35,14 +35,8 @@ The sandbox is created. You can now access it by using the shortcut **Go to sand
 
 ![](https://files.readme.io/f5d42bc030aa4a885820a547ba115ecf71e9b0c0e797b5627e83a73c118aa4ca-sandbox-go-to-sandbox.png)
 
-
 ## Sandbox API
 
-The sandbox API works just like the production API. You can [generate an API token](/API/api-tokens.md) and use it to make API calls. The sandbox API URL is `api-sandbox.demo.deel.com`.
+The sandbox API works just like the production API. You can [generate an API token](/docs/Basics/authentication-1/api-tokens-1.md) and use it to make API calls. The sandbox API URL is `api-sandbox.demo.deel.com`.
 
 Following is an example of an API request to the sandbox API URL.
-
-```shell
-curl --location --request GET 'https://api-sandbox.demo.deel.com/rest/v2/contracts' \
---header 'Authorization: Bearer {token}'
-```
