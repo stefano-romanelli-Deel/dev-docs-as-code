@@ -16,7 +16,7 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
-      - run: npx docusaurus deploy --yes
+      - run: npx docusaurus deploy
         env:
           GIT_USER: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
