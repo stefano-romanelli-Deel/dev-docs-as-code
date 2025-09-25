@@ -29,8 +29,8 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'stefano-romanelli-Deel', // Usually your GitHub org/user name.
   projectName: 'dev-docs-as-code', // Usually your repo name.
-  deploymentBranch: 'gh-pages',
-  trailingSlash: false,
+  deploymentBranch: 'main',
+  // trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
