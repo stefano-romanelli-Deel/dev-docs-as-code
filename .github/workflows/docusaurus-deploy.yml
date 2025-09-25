@@ -16,6 +16,10 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
+      - name: Configure git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
       - run: npx docusaurus deploy
         env:
           GIT_USER: ${{ github.actor }}
