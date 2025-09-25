@@ -6,7 +6,7 @@ hidden: false
 createdAt: "Mon Aug 22 2022 12:02:12 GMT+0000 (Coordinated Universal Time)"
 updatedAt: "Fri Mar 07 2025 16:11:46 GMT+0000 (Coordinated Universal Time)"
 ---
-A common use case for OAuth2 is to create apps for your organization or for the [App Store](#request-to-publish-an-app-to-the-app-store) to enhance some functionalities or to connect with third-party services.
+A common use case for OAuth2 is to create apps for your organization or for the [App Store](/docs/Basics/app-listing) to enhance some functionalities or to connect with third-party services.
 
 > 📘 Only client users can use OAuth2 apps
 > 

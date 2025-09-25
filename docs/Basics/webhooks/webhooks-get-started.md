@@ -135,7 +135,7 @@ else:
     reject_request()
 ```
 
-Additionally, you can find language-specific examples in the [Webhook verification examples](/docs/webhook-verification-examples) .
+Additionally, you can find language-specific examples in the [Webhook verification examples](/docs/Basics/webhooks/webhooks-verification-examples.md) .
 
 > 🚧 Common pitfalls
 > 

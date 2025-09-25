@@ -252,7 +252,7 @@ Where:
 
 ### Retrieve a payment breakdown
 
-You can retrieve the breakdown of the payments made to Deel by using the payment ID that is returned in the [payment receipt](#retrieve-payment-receipts). The breakdown includes all the details of a payment and is available for both [Deel fee](#retrieve-deel-fees-invoices) and [worker](#retrieve-worker-invoices) invoices.
+You can retrieve the breakdown of the payments made to Deel by using the payment ID that is returned in the [payment receipt](#retrieve-payment-receipts). The breakdown includes all the details of a payment and is available for both [Deel fee](#retrieve-deel-fees-invoices) and [worker](#retrieve-worker-salary-invoices) invoices.
 
 To retrieve the breakdown, make a GET request to the [Retrieve a payment breakdown](https://developer.deel.com/reference/retrieveapaymentbreakdown) endpoint.
 

@@ -54,4 +54,4 @@ If your use case meets both conditions, webhooks are the ideal solution because 
 
 ## Get started with webhooks
 
-Head over to [Get started with webhooks](/docs/webhooks-get-started) page to learn the basics for using webhooks.
+Head over to [Get started with webhooks](/docs/Basics/webhooks/webhooks-get-started) page to learn the basics for using webhooks.

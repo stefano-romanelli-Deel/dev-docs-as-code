@@ -8,7 +8,7 @@ updatedAt: "Tue Sep 23 2025 08:49:16 GMT+0000 (Coordinated Universal Time)"
 ---
 With the time tracking API, you can manage the time worked by employees, and add, update, retrieve and delete their shifts.
 
-> 📘 The time tracking API only works for [Global Payroll]([https://help.letsdeel.com/hc/en-gb/articles/9080297174033-Global-Payroll-Overview)
+> 📘 The time tracking API only works for [Global Payroll](https://help.letsdeel.com/hc/en-gb/articles/9080297174033-Global-Payroll-Overview)
 > 
 > Independent contractors use timesheets to track their time. For more information, see [Timesheets](https://developer.deel.com/docs/timesheets-1).
 
@@ -570,7 +570,7 @@ If you need it, you can update the information of a shift before it's processed.
 This section explains how to update shifts that haven't been processed for payroll:
 
 - [Update categorized shift for an employee](#update-categorized-shift-for-an-employee)
-- [Update uncategorized shift for an employee](#update-uncategorized-shift-for-an-employee)
+- [Update uncategorized (raw) shift for an employee](#update-uncategorized-raw-shift-for-an-employee)
 
 ### Update categorized shift for an employee
 
