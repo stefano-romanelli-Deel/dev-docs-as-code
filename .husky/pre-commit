@@ -1,12 +1,12 @@
 #!/bin/sh
 
-echo "🔍 Running Vale checks on staged Markdown files..."
+echo "🔍 Running Vale checks on staged Markdown files in docs/..."
 
-# Get staged markdown files (Added, Copied, Modified, Renamed)
-STAGED_MD=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.md$' || true)
+# Get staged markdown files inside docs/ (Added, Copied, Modified, Renamed)
+STAGED_MD=$(git diff --cached --name-only --diff-filter=ACMR | grep '^docs/.*\.md$' || true)
 
 if [ -z "$STAGED_MD" ]; then
-  echo "✅ No staged Markdown files to lint"
+  echo "✅ No staged Markdown files in docs/ to lint"
   exit 0
 fi
 
