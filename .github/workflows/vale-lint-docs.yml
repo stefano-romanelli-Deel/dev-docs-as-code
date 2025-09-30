@@ -14,11 +14,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Vale Linter
-        uses: errata-ai/vale-action@v2.1.1
-        with:
-          # Lint the full file for any file modified or added in the PR
-          filter_mode: file
-          # Optional: restrict which files Vale should lint
-          files: |
-            docs
+      - name: Install Vale
+        run: |
+          VERSION=$(curl -s https://api.github.com/repos/errata-ai/vale/releases/latest | jq -r .tag_name)
+          curl -fsSL "https://github.com/errata-ai/vale/releases/download/${VERSION}/vale_${VERSION#v}_Linux_64-bit.tar.gz" \
+          | tar -xz -C /usr/local/bin
+
+      - name: Install reviewdog
+        run: |
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh \
+          | sh -s -- -b /usr/local/bin
+
+      - name: Run Vale with reviewdog
+        run: |
+          VALE_MIN_ALERT_LEVEL=warning \
+          vale --no-exit --output=line docs \
+            | reviewdog -efm="%f:%l:%c: %m" \
+                -name="Vale" \
+                -reporter=github-pr-annotations \
+                -filter-mode=file \
+                -fail-on-error=false
