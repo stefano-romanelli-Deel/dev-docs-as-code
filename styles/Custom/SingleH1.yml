@@ -1,0 +1,8 @@
+# styles/Custom/SingleH1.yml
+extends: occurrence
+message: "Only one H1 heading (`# Heading`) is allowed per file."
+level: error
+scope: raw
+token: '(?m)^[ \t]*#[ \t]+.+$'
+max: 1
+# min: 1   # <- add this if you want to require at least one H1

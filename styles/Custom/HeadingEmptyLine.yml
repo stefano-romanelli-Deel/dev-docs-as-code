@@ -1,0 +1,8 @@
+# styles/Custom/HeadingEmptyLine.yml
+extends: existence
+message: "Add an empty line after this heading."
+level: error
+scope: raw
+nonword: true
+tokens:
+  - '(?m)^(#{1,6}[ \t]+.+)\n(?!\n)'

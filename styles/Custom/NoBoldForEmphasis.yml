@@ -1,0 +1,16 @@
+# styles/Custom/NoBold.yml
+extends: existence
+message: "Don't use bold for emphasis."
+level: error
+scope: raw
+nonword: true
+tokens:
+  - '\*\*[^*\n]+\*\*'
+  - '__[^_\n]+__'
+exceptions:
+  - Settings
+  - Save
+  - OK
+  - Next
+  - Previous
+  - Cancel

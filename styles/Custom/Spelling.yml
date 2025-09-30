@@ -1,0 +1,8 @@
+# styles/Custom/Spelling.yml
+extends: spelling
+message: "Did you really mean '%s'?"
+level: error
+
+# 👇 This tells Vale to ignore text inside inline/fenced code
+scope:
+  - ~code
