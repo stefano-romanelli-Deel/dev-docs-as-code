@@ -1,6 +1,7 @@
 ## This workflow runs Vale on the main branch and reports the results to GitHub Code Scanning so that all the "suggestion" and "warning" that are skipped can be monitored.
 
 name: Vale reporting checks
+
 on:
   push:
     branches:
@@ -24,19 +25,25 @@ jobs:
           curl -fsSL "https://github.com/errata-ai/vale/releases/download/${VERSION}/vale_${VERSION#v}_Linux_64-bit.tar.gz" \
           | tar -xz -C /usr/local/bin
 
-      - name: Debug Vale setup
+      - name: Run Vale (JSON output)
         run: |
-          pwd
-          ls -la
-          cat .vale.ini || echo ".vale.ini missing"
-          ls -R styles || echo "styles dir missing"
+          VALE_MIN_ALERT_LEVEL=suggestion vale --output=JSON docs > vale-results.json
+          ls -l vale-results.json
 
-      - name: Run Vale (SARIF output)
+      - name: Convert JSON to SARIF
         run: |
-          VALE_MIN_ALERT_LEVEL=suggestion vale --output=SARIF docs > vale-results.sarif
+          jq -n --slurpfile results vale-results.json '{
+            "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0.json",
+            "version": "2.1.0",
+            "runs": [{
+              "tool": { "driver": { "name": "Vale" } },
+              "results": $results[0]
+            }]
+          }' > vale-results.sarif
           ls -l vale-results.sarif
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: vale-results.sarif
+
