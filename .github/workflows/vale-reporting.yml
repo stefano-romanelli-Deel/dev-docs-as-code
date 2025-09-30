@@ -12,16 +12,19 @@ jobs:
   vale-main:
     runs-on: ubuntu-latest
     permissions:
-      security-events: write   # required for SARIF upload
+      security-events: write
       contents: read
     steps:
       - uses: actions/checkout@v4
 
       - name: Run Vale (SARIF output)
-        run: |
-          vale --output=SARIF docs/**/*.md > vale-results.sarif
+        uses: errata-ai/vale-action@v2.1.1
+        with:
+          files: docs/**/*.md
+          output: SARIF
+          no_exit: true   # don't fail if only warnings/suggestions
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: vale-results.sarif
+          sarif_file: vale.sarif
