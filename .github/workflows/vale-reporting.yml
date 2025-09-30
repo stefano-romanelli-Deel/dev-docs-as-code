@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - "docs/**"
+  workflow_dispatch:
 
 jobs:
   vale-main:
@@ -23,11 +24,17 @@ jobs:
           curl -fsSL "https://github.com/errata-ai/vale/releases/download/${VERSION}/vale_${VERSION#v}_Linux_64-bit.tar.gz" \
           | tar -xz -C /usr/local/bin
 
+      - name: List docs files
+        run: |
+          echo "Markdown files under docs/:"
+          find docs -type f -name "*.md"
+
       - name: Run Vale (SARIF output)
         run: |
-          VALE_MIN_ALERT_LEVEL=suggestion vale --glob='docs/**/*.md' --output=SARIF --out=vale-results.sarif
+          VALE_MIN_ALERT_LEVEL=suggestion vale --output=SARIF --out=vale-results.sarif docs
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: vale-results.sarif
+
