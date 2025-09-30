@@ -24,6 +24,13 @@ jobs:
           curl -fsSL "https://github.com/errata-ai/vale/releases/download/${VERSION}/vale_${VERSION#v}_Linux_64-bit.tar.gz" \
           | tar -xz -C /usr/local/bin
 
+      - name: Debug Vale setup
+        run: |
+          pwd
+          ls -la
+          cat .vale.ini || echo ".vale.ini missing"
+          ls -R styles || echo "styles dir missing"
+
       - name: Run Vale (SARIF output)
         run: |
           VALE_MIN_ALERT_LEVEL=suggestion vale --output=SARIF docs > vale-results.sarif
