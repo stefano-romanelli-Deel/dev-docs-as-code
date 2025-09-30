@@ -28,6 +28,11 @@ jobs:
         run: |
           echo "Markdown files under docs/:"
           find docs -type f -name "*.md"
+          
+      - name: Verify repo structure
+        run: |
+          pwd
+          ls -R | head -50
 
       - name: Run Vale (SARIF output)
         run: |
