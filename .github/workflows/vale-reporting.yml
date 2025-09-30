@@ -19,12 +19,13 @@ jobs:
 
       - name: Install Vale
         run: |
-          curl -fsSL https://github.com/errata-ai/vale/releases/latest/download/vale_Linux_64-bit.tar.gz \
+          VERSION=$(curl -s https://api.github.com/repos/errata-ai/vale/releases/latest | jq -r .tag_name)
+          curl -fsSL "https://github.com/errata-ai/vale/releases/download/${VERSION}/vale_${VERSION#v}_Linux_64-bit.tar.gz" \
           | tar -xz -C /usr/local/bin
 
       - name: Run Vale (SARIF output)
         run: |
-          vale --output=SARIF docs/**/*.md > vale-results.sarif
+          VALE_MIN_ALERT_LEVEL=suggestion vale --output=SARIF docs/**/*.md > vale-results.sarif
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
