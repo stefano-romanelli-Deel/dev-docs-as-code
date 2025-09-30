@@ -10,11 +10,20 @@ if [ -z "$STAGED_MD" ]; then
   exit 0
 fi
 
-# Run Vale on the staged files
-vale --minAlertLevel=error $STAGED_MD
-RESULT=$?
+FAIL=0
 
-if [ $RESULT -ne 0 ]; then
+# Process each staged file safely (handles spaces in filenames)
+echo "$STAGED_MD" | while IFS= read -r file; do
+  if [ -n "$file" ]; then
+    vale --minAlertLevel=error "$file"
+    RESULT=$?
+    if [ $RESULT -ne 0 ]; then
+      FAIL=1
+    fi
+  fi
+done
+
+if [ $FAIL -ne 0 ]; then
   echo "❌ Commit blocked due to Vale errors"
   exit 1
 fi
