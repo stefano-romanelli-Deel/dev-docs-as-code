@@ -26,6 +26,8 @@ jobs:
           | sh -s -- -b /usr/local/bin
 
       - name: Run Vale with reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VALE_MIN_ALERT_LEVEL=warning \
           vale --no-exit --output=line docs \
@@ -34,3 +36,4 @@ jobs:
                 -reporter=github-pr-annotations \
                 -filter-mode=file \
                 -fail-on-error=false
+
