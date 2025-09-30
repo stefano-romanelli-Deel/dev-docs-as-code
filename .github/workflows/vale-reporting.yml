@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Vale (JSON output)
         run: |
-          VALE_MIN_ALERT_LEVEL=suggestion vale --no-exit --output=JSON docs > vale-results.json
+          VALE_MIN_ALERT_LEVEL=suggestion vale --no-exit --output=SARIF docs > vale-results.sarif
           ls -l vale-results.json
           head -20 vale-results.json
 
