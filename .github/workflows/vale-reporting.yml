@@ -1,0 +1,27 @@
+## This workflow runs Vale on the main branch and reports the results to GitHub Code Scanning so that all the "suggestion" and "warning" that are skipped can be monitored.
+
+name: Vale reporting checks
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**/*.md"
+
+jobs:
+  vale-main:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write   # required for SARIF upload
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Vale (SARIF output)
+        run: |
+          vale --output=SARIF docs/**/*.md > vale-results.sarif
+
+      - name: Upload SARIF to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: vale-results.sarif
