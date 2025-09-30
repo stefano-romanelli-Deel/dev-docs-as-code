@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "🔍 Running Vale checks on staged Markdown files..."
+
+# Get staged markdown files (Added, Copied, Modified, Renamed)
+STAGED_MD=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.md$' || true)
+
+if [ -z "$STAGED_MD" ]; then
+  echo "✅ No staged Markdown files to lint"
+  exit 0
+fi
+
+# Run Vale on the staged files
+vale --minAlertLevel=error $STAGED_MD
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+  echo "❌ Commit blocked due to Vale errors"
+  exit 1
+fi
+
+echo "✅ Vale checks passed"
