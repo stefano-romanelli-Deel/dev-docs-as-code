@@ -27,8 +27,9 @@ jobs:
 
       - name: Run Vale (JSON output)
         run: |
-          VALE_MIN_ALERT_LEVEL=suggestion vale --output=JSON docs > vale-results.json
+          VALE_MIN_ALERT_LEVEL=suggestion vale --no-exit --output=JSON docs > vale-results.json
           ls -l vale-results.json
+          head -20 vale-results.json
 
       - name: Convert JSON to SARIF
         run: |
