@@ -12,14 +12,12 @@ fi
 
 FAIL=0
 
-# Process each staged file safely (handles spaces in filenames)
-echo "$STAGED_MD" | while IFS= read -r file; do
-  if [ -n "$file" ]; then
-    vale --minAlertLevel=suggestion "$file"
-    RESULT=$?
-    if [ $RESULT -ne 0 ]; then
-      FAIL=1
-    fi
+# Loop through files so spaces are handled properly
+for file in $STAGED_MD; do
+  vale --minAlertLevel=suggestion "$file"
+  RESULT=$?
+  if [ $RESULT -ne 0 ]; then
+    FAIL=1
   fi
 done
 
