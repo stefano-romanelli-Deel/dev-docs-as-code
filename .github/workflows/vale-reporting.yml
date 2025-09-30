@@ -27,21 +27,40 @@ jobs:
 
       - name: Run Vale (JSON output)
         run: |
-          VALE_MIN_ALERT_LEVEL=suggestion vale --no-exit --output=SARIF docs > vale-results.sarif
+          VALE_MIN_ALERT_LEVEL=suggestion vale --no-exit --output=JSON docs > vale-results.json || true
           ls -l vale-results.json
           head -20 vale-results.json
 
       - name: Convert JSON to SARIF
         run: |
-          jq -n --slurpfile results vale-results.json '{
-            "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0.json",
-            "version": "2.1.0",
-            "runs": [{
-              "tool": { "driver": { "name": "Vale" } },
-              "results": $results[0]
-            }]
-          }' > vale-results.sarif
+          jq 'to_entries
+              | map(
+                  .key as $file
+                  | .value[]
+                  | {
+                      ruleId: .Check,
+                      level: (if .Severity=="error" then "error"
+                              elif .Severity=="warning" then "warning"
+                              else "note" end),
+                      message: { text: .Message },
+                      locations: [{
+                        physicalLocation: {
+                          artifactLocation: { uri: $file },
+                          region: { startLine: .Line }
+                        }
+                      }]
+                    }
+                )
+              | {
+                  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0.json",
+                  version: "2.1.0",
+                  runs: [{
+                    tool: { driver: { name: "Vale" } },
+                    results: .
+                  }]
+                }' vale-results.json > vale-results.sarif
           ls -l vale-results.sarif
+
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
