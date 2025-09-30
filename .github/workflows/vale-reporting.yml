@@ -17,14 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Vale
+        run: |
+          curl -fsSL https://github.com/errata-ai/vale/releases/latest/download/vale_Linux_64-bit.tar.gz \
+          | tar -xz -C /usr/local/bin
+
       - name: Run Vale (SARIF output)
-        uses: errata-ai/vale-action@v2.1.1
-        with:
-          files: docs/**/*.md
-          output: SARIF
-          no_exit: true   # don't fail if only warnings/suggestions
+        run: |
+          vale --output=SARIF docs/**/*.md > vale-results.sarif
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: vale.sarif
+          sarif_file: vale-results.sarif
