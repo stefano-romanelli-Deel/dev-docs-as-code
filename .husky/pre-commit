@@ -15,7 +15,7 @@ FAIL=0
 # Process each staged file safely (handles spaces in filenames)
 echo "$STAGED_MD" | while IFS= read -r file; do
   if [ -n "$file" ]; then
-    vale --minAlertLevel=error "$file"
+    vale --minAlertLevel=suggestion "$file"
     RESULT=$?
     if [ $RESULT -ne 0 ]; then
       FAIL=1
