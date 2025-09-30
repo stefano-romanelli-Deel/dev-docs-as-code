@@ -1,0 +1,24 @@
+name: Vale Lint
+
+on:
+  pull_request:
+    paths:
+      - "docs/**/*.md"
+
+jobs:
+  vale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Vale Linter
+        uses: errata-ai/vale-action@v2.1.1
+        with:
+          # Lint the full file for any file modified or added in the PR
+          filter_mode: file
+          # Optional: restrict which files Vale should lint
+          files: |
+            docs/**/*.md
