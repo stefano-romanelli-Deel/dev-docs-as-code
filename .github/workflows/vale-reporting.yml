@@ -31,7 +31,12 @@ jobs:
 
       - name: Run Vale (SARIF output)
         run: |
-          VALE_MIN_ALERT_LEVEL=suggestion vale --output=SARIF --out=vale-results.sarif docs
+          set -x
+          VALE_MIN_ALERT_LEVEL=suggestion vale --version
+          VALE_MIN_ALERT_LEVEL=suggestion vale --output=SARIF --out=vale-results.sarif docs || true
+          ls -l
+          cat vale-results.sarif || echo "No SARIF file produced"
+
 
       - name: Upload SARIF to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
