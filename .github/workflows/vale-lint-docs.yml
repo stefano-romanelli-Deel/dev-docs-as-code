@@ -21,4 +21,4 @@ jobs:
           filter_mode: file
           # Optional: restrict which files Vale should lint
           files: |
-            docs/**/*.md
+            docs
